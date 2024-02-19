@@ -1,4 +1,4 @@
-package com.zerobase.user.service;
+package com.zerobase.user.service.customer;
 
 import com.zerobase.user.domain.model.Customer;
 import com.zerobase.user.domain.repository.CustomerRepository;
@@ -10,6 +10,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
+
     private final CustomerRepository customerRepository;
 
     public Optional<Customer> findByIdAndEmail(Long id, String email) {
@@ -19,9 +20,8 @@ public class CustomerService {
     }
 
     public Optional<Customer> findValidCustomer(String email, String password) {
-        return customerRepository.findByEmail(email)
-                .stream()
-                .filter(customer -> customer.getPassword().equals(password) && customer.isVerify())
+        return customerRepository.findByEmail(email).stream()
+                .filter(customer -> customer.isVerify() && customer.getPassword().equals(password))
                 .findFirst();
     }
 }
