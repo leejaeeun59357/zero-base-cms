@@ -6,7 +6,7 @@ import com.zerobase.user.domain.customer.CustomerDto;
 import com.zerobase.user.domain.model.Customer;
 import com.zerobase.user.exception.CustomException;
 import com.zerobase.user.exception.ErrorCode;
-import com.zerobase.user.service.CustomerService;
+import com.zerobase.user.service.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +27,10 @@ public class CustomerController {
             @RequestHeader(name = "X-AUTH-TOKEN") String token
     ) {
         UserVo vo = provider.getUserVo(token);
-        Customer c = customerService.findByIdAndEmail(vo.getId(), vo.getEmail()).orElseThrow(
-                () -> new CustomException(ErrorCode.NOT_FOUND_USER));
+        Customer c = customerService.findByIdAndEmail(vo.getId(), vo.getEmail())
+                .orElseThrow(
+                        () -> new CustomException(ErrorCode.NOT_FOUND_USER)
+                );
 
         return ResponseEntity.ok(CustomerDto.from(c));
     }

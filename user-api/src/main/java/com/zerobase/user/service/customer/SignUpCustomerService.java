@@ -1,4 +1,4 @@
-package com.zerobase.user.service;
+package com.zerobase.user.service.customer;
 
 import com.zerobase.user.domain.SignUpForm;
 import com.zerobase.user.domain.model.Customer;
@@ -33,28 +33,29 @@ public class SignUpCustomerService {
         Customer customer = customerRepository.findByEmail(email)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
 
-        if(customer.isVerify()) {
-            throw new CustomException(ErrorCode.ALREADY_VERIFY);
-        }else if(!customer.getVerificationCode().equals(code)) {
-            throw new CustomException(ErrorCode.WRONG_VERIFICATION);
-        }else if(customer.getVerifyExpiredAt().isBefore(LocalDateTime.now())) {
-            throw new CustomException(ErrorCode.EXPIRE_CODE);
+        if (customer.isVerify()) {
+            throw new CustomException(ErrorCode.ALREADY_VERIFIED);
         }
-
+        if (!customer.getVerificationCode().equals(code)) {
+            throw new CustomException(ErrorCode.WRONG_VERIFICATION);
+        }
+        if (customer.getVerifyExpiredAt().isBefore(LocalDateTime.now())) {
+            throw new CustomException(ErrorCode.CODE_EXPIRED);
+        }
         customer.setVerify(true);
     }
 
     @Transactional
     public LocalDateTime changeCustomerValidateEmail(Long customerId, String verificationCode) {
-       Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        Optional<Customer> customerOptional = customerRepository.findById(customerId);
 
-       if(customerOptional.isPresent()) {
-           Customer customer = customerOptional.get();
-           customer.setVerificationCode(verificationCode);
-           customer.setVerifyExpiredAt(LocalDateTime.now().plusDays(1));
-           return customer.getVerifyExpiredAt();
-       }
+        if (customerOptional.isPresent()) {
+            Customer customer = customerOptional.get();
+            customer.setVerificationCode(verificationCode);
+            customer.setVerifyExpiredAt(LocalDateTime.now().plusDays(1));
+            return customer.getVerifyExpiredAt();
+        }
 
-       throw new CustomException(ErrorCode.NOT_FOUND_USER);
+        throw new CustomException(ErrorCode.NOT_FOUND_USER);
     }
 }
