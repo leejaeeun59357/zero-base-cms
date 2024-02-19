@@ -4,7 +4,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
-group = 'com.zerobase.cms.user'
+group = 'com.zerobase.user'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -22,6 +22,10 @@ configurations {
 }
 
 dependencies {
+
+    implementation project(':zerobase-domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
 
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
