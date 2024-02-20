@@ -1,0 +1,46 @@
+### 회원가입 (고객)
+POST http://localhost:8081/signup/customer
+Content-Type: application/json
+
+{
+  "birth": "2000-01-20",
+  "email": "ne2227@naver.com",
+  "name": "myName",
+  "password": "pw",
+  "phone": "01000000000"
+}
+
+### 이메일 인증 (고객)
+GET http://localhost:8081/signup/customer/verify?email=ne2227@naver.com&code=mS5fdGjPj2
+
+
+### 로그인 (고객)
+POST http://localhost:8081/signin/customer
+Content-Type: application/json
+
+{
+  "email": "ne2227@naver.com",
+  "password": "pw"
+}
+
+### 회원 정보 조회 (고객)
+GET http://localhost:8081/customer/getInfo
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJYeU1xekRDbWd2WUdtdUg3S1d2UFdzQlFLWkpFVU1RRXFYSmhYQnQvWGZvPSIsImp0aSI6IjEzUlpBdFpPSzZYTkI3TzluaTFNekE9PSIsInJvbGVzIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MDg0MTIxMDYsImV4cCI6MTcwODQ5ODUwNn0.wR23M87m3zl4fq1l-XhZH7eAK6fKoEcaiMuwk3wuQjQ
+
+
+### 잔액 변경 (고객)
+PUT http://localhost:8081/customer/balance
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJYeU1xekRDbWd2WUdtdUg3S1d2UFdzQlFLWkpFVU1RRXFYSmhYQnQvWGZvPSIsImp0aSI6IjEzUlpBdFpPSzZYTkI3TzluaTFNekE9PSIsInJvbGVzIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MDg0MTIxMDYsImV4cCI6MTcwODQ5ODUwNn0.wR23M87m3zl4fq1l-XhZH7eAK6fKoEcaiMuwk3wuQjQ
+
+{
+  "from": "server",
+  "message": "돈 충전",
+  "money": 50000
+}
+
+##########################################
+
+### 회원가입 (셀러)
+
+### 로그인(셀러)
