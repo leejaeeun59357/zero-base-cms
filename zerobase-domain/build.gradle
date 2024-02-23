@@ -4,12 +4,12 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
-bootJar{enabled = false}
-jar{enabled=true}
+bootJar { enabled = false }
+jar { enabled = true }
 
 
 java {
-    sourceCompatibility = '17'
+    sourceCompatibility = '11'
 }
 
 repositories {
@@ -30,6 +30,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-test {
+tasks.named('test') {
     useJUnitPlatform()
 }
