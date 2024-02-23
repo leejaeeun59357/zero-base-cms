@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ServletComponentScan
 @EnableJpaRepositories(repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
 @EnableJpaAuditing
-@SpringBootApplication
 @EnableFeignClients
+@SpringBootApplication
 public class ZeroOrderApplication {
 
 	public static void main(String[] args) {

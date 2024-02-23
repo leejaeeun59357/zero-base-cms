@@ -1,4 +1,4 @@
-package com.zerobase.user.domain.model;
+package com.zerobase.cms.order.domain.model;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;

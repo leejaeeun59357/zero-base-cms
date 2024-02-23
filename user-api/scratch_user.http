@@ -39,8 +39,28 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJYeU1xekRDbWd2WUdtdUg3S1d2UFdzQlFLW
   "money": 50000
 }
 
-##########################################
-
 ### 회원가입 (셀러)
+POST http://localhost:8081/signup/seller
+Content-Type: application/json
+
+{
+  "birth": "2000-01-20",
+  "email": "ne2227@naver.com",
+  "name": "myName",
+  "password": "pw",
+  "phone": "01000000000"
+}
+
+
+### 이메일 인증(셀러)
+GET http://localhost:8081/signup/seller/verify?email=ne2227@naver.com&code=iOiZqrUjzs
+
 
 ### 로그인(셀러)
+POST http://localhost:8081/signin/seller
+Content-Type: application/json
+
+{
+  "email": "ne2227@naver.com",
+  "password": "pw"
+}
