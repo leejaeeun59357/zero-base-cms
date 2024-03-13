@@ -34,9 +34,13 @@ class ProductServiceTest {
         Product result = productRepository.findWithProductItemsById(p.getId()).get();
 
         assertNotNull(result);
+        assertEquals(result.getName(), "나이키 에어포스");
+        assertEquals(result.getDescription(), "신발");
+
         assertEquals(result.getProductItems().size(),3);
         assertEquals(result.getProductItems().get(0).getName(),"나이키 에어포스");
         assertEquals(result.getProductItems().get(0).getPrice(),10000);
+        assertEquals(result.getProductItems().get(0).getCount(),1);
     }
 
     private static AddProductForm makeProductForm(
