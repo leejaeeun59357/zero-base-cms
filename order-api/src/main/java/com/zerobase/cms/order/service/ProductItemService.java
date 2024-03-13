@@ -19,6 +19,16 @@ public class ProductItemService {
     private final ProductRepository productRepository;
     private final ProductItemRepository productItemRepository;
 
+    /**
+     * id를 이용하여 productItem entity 찾기
+     * @param id
+     * @return
+     */
+    @Transactional
+    public ProductItem getProductItem(Long id) {
+        return productItemRepository.getById(id);
+    }
+
     @Transactional
     public Product addProductItem(Long sellerId, AddProductItemForm form) {
         Product product = productRepository.findBySellerIdAndId(sellerId, form.getProductId())
